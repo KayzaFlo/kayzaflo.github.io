@@ -1,7 +1,9 @@
 import * as THREE from 'three';
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+scene.background = new THREE.Color('skyblue');
+// const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+const camera = new THREE.PerspectiveCamera( 75, 160 / 90, 0.1, 1000 );
 // const camera = new THREE.OrthographicCamera(
 // 	-8,
 // 	8,
@@ -10,9 +12,14 @@ const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.inner
 // 	1, 1000 );
 camera.position.z = 5;
 
-const renderer = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
+
+// const resizer = new Resizer(container, camera, renderer);
+// resizer.onResize = () => {
+//   this.render();
+// };
 
 /* **** LIGHTING **** */
 const AmbientLight = new THREE.AmbientLight( 0xffffff, 0.5 );
@@ -44,7 +51,7 @@ let ballSpeed = 0.05;
 function animate() {
 	requestAnimationFrame( animate );
 	
-	console.log(o_ball.position);
+	// console.log(o_ball.position);
 	o_ball.translateOnAxis(ballDir, ballSpeed);
 	if (o_ball.position.x < -6 && ballDir.x < 0)
 		ballDir.x *= -1;
